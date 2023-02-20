@@ -14,13 +14,60 @@ import random
 import time
 import tkinter as tk
 import pyautogui
-import Xlib.display
+
 
 # here is the list of occult symbols to display on user screen
 symbols = ['☥', '☦', '☧', '☨', '☩', '☫', '☬', '☼', '☽', '☾', '☿', '♀', '♁', '♂', '♃', '♄', '♅', '♆', '♇', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓', '♙', '♰', '♱']
 
 
 # display random symbols for the list on the user screen
+
+# For MAC (need quartz installation)
+
+import Quartz.CoreGraphics as CG
+
+# Generate a random symbol
+symbol = symbols[random.randint(0, len(symbols) - 1)]
+
+# Get the main display
+mainDisplay = CG.CGDisplayCreateMainDisplay()
+
+# Get the screen size and create a new context
+screenSize = CG.CGDisplayBounds(mainDisplay)
+context = CG.CGContextCreate(CG.CGDisplayCreateImage(mainDisplay))
+
+# Set the text color and background color
+text_color = CG.CGColorCreateGenericRGB(1.0, 1.0, 1.0, 1.0)  # white
+bg_color = CG.CGColorCreateGenericRGB(0.0, 0.0, 0.0, 1.0)  # black
+CG.CGContextSetFillColorWithColor(context, bg_color)
+CG.CGContextSetStrokeColorWithColor(context, text_color)
+CG.CGContextSetLineWidth(context, 0)
+
+# Create a new font for the symbol
+font = CG.CTFontCreateWithName("Monaco", 36, None)
+
+# Draw the symbol at a random position on the screen
+x = random.randint(0, screenSize.size.width)
+y = random.randint(0, screenSize.size.height - 36)
+CG.CGContextSetTextPosition(context, x, y)
+CG.CGContextSetFont(context, font)
+CG.CGContextShowText(context, symbol)
+
+# Release the font and context
+CG.CGFontRelease(font)
+CG.CGContextFlush(context)
+CG.CGContextRelease(context)
+
+# Release the colorspace and display
+CG.CGColorRelease(text_color)
+CG.CGColorRelease(bg_color)
+CG.CGDisplayRelease(mainDisplay)
+
+"""
+
+# For Windows
+
+import Xlib.display
 
 # Generate a random symbol
 symbol = symbols[random.randint(0, len(symbols) - 1)]
@@ -51,6 +98,8 @@ gc.free()
 
 # Flush the X server to update the display
 display.flush()
+
+"""
 
 """
 
