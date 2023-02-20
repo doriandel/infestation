@@ -14,6 +14,7 @@ import random
 import time
 import tkinter as tk
 import pyautogui
+import Xlib.display
 
 # here is the list of occult symbols to display on user screen
 symbols = ['☥', '☦', '☧', '☨', '☩', '☫', '☬', '☼', '☽', '☾', '☿', '♀', '♁', '♂', '♃', '♄', '♅', '♆', '♇', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓', '♙', '♰', '♱']
@@ -21,19 +22,35 @@ symbols = ['☥', '☦', '☧', '☨', '☩', '☫', '☬', '☼', '☽', '☾',
 
 # display random symbols for the list on the user screen
 
-# Generate a random symbol and position
+# Generate a random symbol
 symbol = symbols[random.randint(0, len(symbols) - 1)]
-x, y = pyautogui.position()
 
-# Move the mouse to the new position
-new_x, new_y = random.randint(0, pyautogui.size().width), random.randint(0, pyautogui.size().height)
-pyautogui.moveTo(new_x, new_y, duration=1)
+# Get the default display and root window
+display = Xlib.display.Display()
+root = display.screen().root
 
-# Display the symbol
-pyautogui.typewrite(symbol, interval=0)
+# Create a new font for the symbol
+font = display.open_font("fixed")
 
-# Move the mouse back to the original position
-pyautogui.moveTo(x, y, duration=1)
+# Calculate the size of the symbol
+font_info = font.query()
+width = font_info.char_width * len(symbol)
+height = font_info.max_bounds.ascent + font_info.max_bounds.descent
+
+# Create a new graphics context and set the font and color
+gc = root.create_gc(foreground=0xFFFFFF, background=0x000000, font=font)
+
+# Draw the symbol at a random position on the screen
+x = random.randint(0, display.screen().width_in_pixels - width)
+y = random.randint(0, display.screen().height_in_pixels - height)
+gc.draw_text(root, gc, x, y + font_info.max_bounds.ascent, symbol)
+
+# Free the font and graphics context
+font.close()
+gc.free()
+
+# Flush the X server to update the display
+display.flush()
 
 """
 
