@@ -10,7 +10,33 @@
 
 import os
 import shutil
-from PIL import Image
+import random
+import time
+import tkinter as tk
+import pyautogui
+
+# here is the list of occult symbols to display on user screen
+symbols = ['☥', '☦', '☧', '☨', '☩', '☫', '☬', '☼', '☽', '☾', '☿', '♀', '♁', '♂', '♃', '♄', '♅', '♆', '♇', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓', '♙', '♰', '♱']
+
+
+# display random symbols for the list on the user screen
+
+# Generate a random symbol and position
+symbol = symbols[random.randint(0, len(symbols) - 1)]
+x, y = pyautogui.position()
+
+# Move the mouse to the new position
+new_x, new_y = random.randint(0, pyautogui.size().width), random.randint(0, pyautogui.size().height)
+pyautogui.moveTo(new_x, new_y, duration=1)
+
+# Display the symbol
+pyautogui.typewrite(symbol, interval=0)
+
+# Move the mouse back to the original position
+pyautogui.moveTo(x, y, duration=1)
+
+"""
+
 
 # Navigate to the target directory
 os.chdir('/path/to/target/directory')
@@ -32,3 +58,5 @@ image.show()
 with open('hidden_file.txt', 'w') as f:
     f.write('This file contains occult symbols and images')
 os.rename('script.py', 'hidden_file.jpg')
+
+"""
