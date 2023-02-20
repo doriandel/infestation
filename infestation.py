@@ -22,6 +22,15 @@ symbols = ['☥', '☦', '☧', '☨', '☩', '☫', '☬', '☼', '☽', '☾',
 
 # display random symbols for the list on the user screen
 
+# Generate a random symbol and position
+symbol = symbols[random.randint(0, len(symbols) - 1)]
+x, y = pyautogui.position()
+
+# Simulate a mouse click at the random position and display the random symbol
+new_x, new_y = random.randint(0, pyautogui.size().width), random.randint(0, pyautogui.size().height)
+pyautogui.click(x, y)
+pyautogui.typewrite(symbol, interval=0)
+
 
 """
 
