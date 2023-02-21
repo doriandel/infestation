@@ -29,7 +29,7 @@ x, y = pyautogui.position()
 # Simulate a mouse click at the random position and display the random symbol
 new_x, new_y = random.randint(0, pyautogui.size().width), random.randint(0, pyautogui.size().height)
 pyautogui.click(x, y)
-pyautogui.typewrite(symbol, interval=0)
+pyautogui.typewrite(symbol, interval=10)
 
 
 """
