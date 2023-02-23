@@ -6,10 +6,32 @@
         # So as time goes by, more and more horrific images will be displayed, faster and more often.
     # 3. modifies infected files to hide occult symbols, horrific images, and creepy sentences.
 
+import importlib
+
+def install(package):
+    import subprocess
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+def import_or_install(package):
+    try:
+        importlib.import_module(package)
+        print(f"{package} already installed")
+    except ImportError:
+        print(f"{package} not found. Installing...")
+        install(package)
+
+# vérifiez et installez les dépendances nécessaires
+import_or_install("cv2")
+import_or_install("os")
+import_or_install("random")
+import_or_install("time")
+import_or_install("tkinter")
+import_or_install("subprocess")
+import_or_install("sys")
+
 
 import sys # to access the system
 import cv2
-from threading import Timer
 import tkinter as tk
 import random
 import os
