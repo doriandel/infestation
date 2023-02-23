@@ -23,13 +23,7 @@ def import_or_install(package):
         install(package)
 
 # vérifiez et installez les dépendances nécessaires
-import_or_install("cv2")
-import_or_install("os")
-import_or_install("random")
-import_or_install("time")
-import_or_install("tkinter")
-import_or_install("subprocess")
-import_or_install("sys")
+import_or_install("opencv-python")
 
 
 import sys # to access the system
