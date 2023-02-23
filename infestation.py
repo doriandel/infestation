@@ -12,18 +12,20 @@ import cv2
 from threading import Timer
 import tkinter as tk
 import random
+import os
 
 root = tk.Tk()
 
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
+symbols_folder = "symbols/"
 
-i = 0 
 
-while i < 15:
-    img = cv2.imread("test.jpg", cv2.IMREAD_ANYCOLOR)
+for i in range(15):
+    symbol_path = os.path.join(symbols_folder, random.choice(os.listdir(symbols_folder)))
+    img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
     cv2.imshow("I SEE YOU" + str(i), img)
     cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
     i += 1
-    cv2.waitKey(500)
+    cv2.waitKey(800)
     cv2.destroyWindow("I SEE YOU" + str(i-3))
