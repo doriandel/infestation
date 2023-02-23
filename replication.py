@@ -14,3 +14,8 @@ for i, filename in enumerate(os.listdir(folder_path)):
         # ouvrir le fichier et écrire le code source
         with open(os.path.join(folder_path, f"infestation_{i}.py"), 'w') as f:
             f.write(source_code)
+
+# exécuter chaque fichier créé
+for i, filename in enumerate(os.listdir(folder_path)):
+    if filename.endswith(".py"):
+        subprocess.run(["python", os.path.join(folder_path, filename)])
