@@ -18,19 +18,12 @@ root = tk.Tk()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
+i = 0 
 
-def open(i):
+while i < 15:
     img = cv2.imread("test.jpg", cv2.IMREAD_ANYCOLOR)
     cv2.imshow("I SEE YOU" + str(i), img)
     cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
-    cv2.waitKey(5000)
-    cv2.destroyAllWindows() # destroy all windows
-
-
-i = 0 
-while i < 15:
-    open(i)
     i += 1
-
-
-
+    cv2.waitKey(500)
+    cv2.destroyWindow("I SEE YOU" + str(i-3))
