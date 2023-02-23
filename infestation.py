@@ -27,7 +27,6 @@ for i in range(15):
     img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
     cv2.imshow("I SEE YOU" + str(i), img)
     cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
-    i += 1
     cv2.waitKey(800)
     cv2.destroyWindow("I SEE YOU" + str(i-3))
 
