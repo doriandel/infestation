@@ -26,6 +26,7 @@ def import_or_install(package):
 # vérifiez et installez les dépendances nécessaires
 import_or_install("opencv-python")
 import_or_install("requests")
+import_or_install("python-certifi-win32")
 
 
 import cv2
