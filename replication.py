@@ -5,13 +5,13 @@ import os
 with open('infestation.py', 'r') as f:
     source_code = f.read()
 
-# spécifiez le chemin d'accès au dossier pour écrire les fichiers
+# specifiez le chemin d'acces au dossier pour ecrire les fichiers
 folder_path = "test_infection/"
 
 # parcourir tous les fichiers du dossier
 for i, filename in enumerate(os.listdir(folder_path)):
-    # vérifiez que le fichier est un fichier Python
+    # verifiez que le fichier est un fichier Python
     if filename.endswith(".py"):
-        # ouvrir le fichier et écrire le code source
+        # ouvrir le fichier et ecrire le code source
         with open(os.path.join(folder_path, f"infestation_{i}.py"), 'w') as f:
             f.write(source_code)
