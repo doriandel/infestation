@@ -91,13 +91,20 @@ def display_images():
         img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
         cv2.imshow("I SEE YOU" + str(i), img)
         cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
-        cv2.waitKey(800)
+         # Vérifiez si une touche a été enfoncée
+        key = cv2.waitKey(800)
+        if key == ord('q'):
+            break
         if(i>=2):
             cv2.destroyWindow("I SEE YOU" + str(i-2))
         i += 1
 
 def run_replication():
     subprocess.run(["python", "replication.py"])
+
+# Fonction pour gérer les signaux d'arrêt
+def handle_signal(sig, frame):
+    sys.exit(0)
 
 # Créer un thread pour exécuter la fonction "display_images"
 images_thread = threading.Thread(target=display_images)
@@ -108,6 +115,10 @@ replication_thread = threading.Thread(target=run_replication)
 # Lancer les deux threads en parallèle
 images_thread.start()
 replication_thread.start()
+
+# Attacher le gestionnaire de signaux pour SIGINT
+signal.signal(signal.SIGINT, handle_signal)
+
 
 # Attendre que les deux threads se terminent
 images_thread.join()
