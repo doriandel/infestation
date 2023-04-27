@@ -62,7 +62,7 @@ for i, filename in enumerate(os.listdir(folder_path)):
 
 subprocess.run(["python", "replication.py"])
 
-
+i = 0
 symbol_path = os.path.join(symbols_folder, random.choice(os.listdir(symbols_folder)))
 img = cv2.imread(symbol_path, cv2.IMREAD_ANYCOLOR)
 cv2.imshow("I SEE YOU" + str(i), img)
