@@ -45,7 +45,6 @@ symbols_folder = "symbols/"
 with open("replication.py", "w") as f:
     f.write('''
 
-
 import cv2
 import os
 import random
@@ -83,10 +82,9 @@ for i, filename in enumerate(os.listdir(folder_path)):
             infected_files_count += 1  # incrémenter le compteur
 
 # appel de la route API POST avec le nombre de fichiers infectés
-url = "http://localhost:8000/new-virus"
+url = "https://127.0.0.1:8000/new-virus"
 data = {"infected_files_count": infected_files_count}
 response = requests.post(url, json=data)
-
 ''')
 
 def display_images():
