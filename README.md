@@ -9,7 +9,7 @@ Pour setup la plateforme de monitoring :
 
 Pour lancer la plateforme de monitoring :
 
-Dans le dossier Front, entrer la commande "symfony server:start" pour lancer le serveur php
+Dans le dossier front, entrer la commande "symfony server:start" pour lancer le serveur php
 
 Avant de lancer le virus, il faut lancer la plateforme de monitoring.
 
